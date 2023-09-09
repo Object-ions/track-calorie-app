@@ -1,17 +1,18 @@
 class CalorieTracker {
   constructor() {
-    this._calorieLimit = 2000;
+    this._calorieLimit = 2200;
     this._totalCalories = 0;
     this._meals = [];
     this._workouts = [];
 
+    this._displayCaloriesLimit();
     this._displayCaloriesTotal();
   }
   //// Public Methods API ////
   addMeal(meal) {
     this._meals.push(meal);
     this._totalCalories += meal.calories;
-    
+
     this._rander();
   }
 
@@ -27,6 +28,11 @@ class CalorieTracker {
   _displayCaloriesTotal() {
     const totalCaloriesEl = document.getElementById('calories-total');
     totalCaloriesEl.innerHTML = this._totalCalories;
+  }
+
+  _displayCaloriesLimit() {
+    const caloriesLimitEl = document.getElementById('calories-limit');
+    caloriesLimitEl.innerHTML = this._calorieLimit;
   }
   
   // Update the UI after adding data
@@ -57,7 +63,10 @@ const tracker = new CalorieTracker();
 
 // Add new meal
 const breakfast = new Meal ('Breakfast', 400);
+const lunch = new Meal ('Lunch', 350)
+
 tracker.addMeal(breakfast);
+tracker.addMeal(lunch);
 
 // Add new workout
 const run = new Workout('Morning Run', 300);
