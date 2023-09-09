@@ -4,16 +4,34 @@ class CalorieTracker {
     this._totalCalories = 0;
     this._meals = [];
     this._workouts = [];
-  }
 
+    this._displayCaloriesTotal();
+  }
+  //// Public Methods API ////
   addMeal(meal) {
     this._meals.push(meal);
     this._totalCalories += meal.calories;
+    
+    this._rander();
   }
 
   addWorkout(workout) {
     this._workouts.push(workout);
     this._totalCalories -= workout.calories;
+
+    this._rander();
+  }
+
+  //// Private Methods ////
+
+  _displayCaloriesTotal() {
+    const totalCaloriesEl = document.getElementById('calories-total');
+    totalCaloriesEl.innerHTML = this._totalCalories;
+  }
+  
+  // Update the UI after adding data
+  _rander() {
+    this._displayCaloriesTotal();
   }
 }
 
