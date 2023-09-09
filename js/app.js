@@ -8,12 +8,12 @@ class CalorieTracker {
 
   addMeal(meal) {
     this._meals.push(meal);
-    this.totalCalories += meal.calories;
+    this._totalCalories += meal.calories;
   }
 
   addWorkout(workout) {
     this._workouts.push(workout);
-    this.totalCalories -= workout.calories;
+    this._totalCalories -= workout.calories;
   }
 }
 
@@ -48,3 +48,4 @@ tracker.addWorkout(run);
 // Testing
 console.log(tracker._meals);
 console.log(tracker._workouts);
+console.log(tracker._totalCalories);
