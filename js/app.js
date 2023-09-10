@@ -7,20 +7,23 @@ class CalorieTracker {
 
     this._displayCaloriesLimit();
     this._displayCaloriesTotal();
+    this._displayCaloriesConsumed();
+    this._displayCaloriesBurned();
   }
+  
   //// Public Methods API ////
   addMeal(meal) {
     this._meals.push(meal);
     this._totalCalories += meal.calories;
 
-    this._rander();
+    this._render();
   }
 
   addWorkout(workout) {
     this._workouts.push(workout);
     this._totalCalories -= workout.calories;
 
-    this._rander();
+    this._render();
   }
 
   //// Private Methods ////
@@ -35,9 +38,27 @@ class CalorieTracker {
     caloriesLimitEl.innerHTML = this._calorieLimit;
   }
   
+  _displayCaloriesConsumed() {
+    const caloriesConsumedEl = document.getElementById('calories-consumed');
+
+    const consumed = this._meals.reduce((total, meal) => total + meal.calories, 0);
+
+    caloriesConsumedEl.innerHTML = consumed;
+  }
+
+  _displayCaloriesBurned() {
+    const caloriesBurnedEl = document.getElementById('calories-burned');
+
+    const burned = this._workouts.reduce((total, workout) => total + workout.calories, 0);
+
+    caloriesBurnedEl.innerHTML = burned;
+  }
+
   // Update the UI after adding data
-  _rander() {
+  _render() {
     this._displayCaloriesTotal();
+    this._displayCaloriesConsumed();
+    this._displayCaloriesBurned();
   }
 }
 
