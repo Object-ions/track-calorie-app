@@ -14,6 +14,8 @@ class CalorieTracker {
   }
   
   //// Public Methods API ////
+
+  // Add meal constructor
   addMeal(meal) {
     this._meals.push(meal);
     this._totalCalories += meal.calories;
@@ -21,6 +23,7 @@ class CalorieTracker {
     this._render();
   }
 
+  // Add workout constructor
   addWorkout(workout) {
     this._workouts.push(workout);
     this._totalCalories -= workout.calories;
@@ -30,22 +33,26 @@ class CalorieTracker {
 
   //// Private Methods ////
 
+  // Display calories total
   _displayCaloriesTotal() {
     const totalCaloriesEl = document.getElementById('calories-total');
     totalCaloriesEl.innerHTML = this._totalCalories;
   }
 
+  // Display calories limit
   _displayCaloriesLimit() {
     const caloriesLimitEl = document.getElementById('calories-limit');
     caloriesLimitEl.innerHTML = this._calorieLimit;
   }
   
+  // Display calories consumed
   _displayCaloriesConsumed() {
     const caloriesConsumedEl = document.getElementById('calories-consumed');
     const consumed = this._meals.reduce((total, meal) => total + meal.calories, 0);
     caloriesConsumedEl.innerHTML = consumed;
   }
 
+  // Display calories burned
   _displayCaloriesBurned() {
     const caloriesBurnedEl = document.getElementById('calories-burned');
     const burned = this._workouts.reduce((total, workout) => total + workout.calories, 0);
