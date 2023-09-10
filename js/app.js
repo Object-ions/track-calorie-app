@@ -9,6 +9,8 @@ class CalorieTracker {
     this._displayCaloriesTotal();
     this._displayCaloriesConsumed();
     this._displayCaloriesBurned();
+    this._displayCaloriesRemaining();
+    this._displayCaloriesProgress();
   }
   
   //// Public Methods API ////
@@ -40,18 +42,31 @@ class CalorieTracker {
   
   _displayCaloriesConsumed() {
     const caloriesConsumedEl = document.getElementById('calories-consumed');
-
     const consumed = this._meals.reduce((total, meal) => total + meal.calories, 0);
-
     caloriesConsumedEl.innerHTML = consumed;
   }
 
   _displayCaloriesBurned() {
     const caloriesBurnedEl = document.getElementById('calories-burned');
-
     const burned = this._workouts.reduce((total, workout) => total + workout.calories, 0);
-
     caloriesBurnedEl.innerHTML = burned;
+  }
+
+  // Display calories remaining
+  _displayCaloriesRemaining() {
+    const caloriesRemainingEl = document.getElementById('calories-remaining');
+    const remaining = this._calorieLimit - this._totalCalories;
+
+    caloriesRemainingEl.innerHTML = remaining;
+  }
+
+  // Display calories progress bar
+  _displayCaloriesProgress() {
+    const progressEl = document.getElementById('calorie-progress');
+    const percentage = (this._totalCalories / this._calorieLimit) * 100;
+    const width = Math.min(percentage, 100);
+
+    progressEl.style.width = `${width}%`;
   }
 
   // Update the UI after adding data
@@ -59,6 +74,8 @@ class CalorieTracker {
     this._displayCaloriesTotal();
     this._displayCaloriesConsumed();
     this._displayCaloriesBurned();
+    this._displayCaloriesRemaining();
+    this._displayCaloriesProgress();
   }
 }
 
@@ -90,7 +107,7 @@ tracker.addMeal(breakfast);
 tracker.addMeal(lunch);
 
 // Add new workout
-const run = new Workout('Morning Run', 300);
+const run = new Workout('Morning Run', 320);
 tracker.addWorkout(run);
 
 // Testing
