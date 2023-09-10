@@ -28,6 +28,7 @@ class CalorieTracker {
   addWorkout(workout) {
     this._workouts.push(workout);
     this._totalCalories -= workout.calories;
+    this._displayNewWorkout(workout);
 
     this._render();
   }
@@ -114,6 +115,30 @@ class CalorieTracker {
     </div>
     `;
     mealsEl.appendChild(mealEl)
+  }
+
+  // Display new workout
+  _displayNewWorkout(workout) {
+    const workoutsEl = document.querySelector('#workout-items');
+    const workoutEl = document.createElement('div');
+    workoutEl.classList.add('card', 'my-2');
+    workoutEl.setAttribute('data-id', workout.id);
+    workoutEl.innerHTML = `
+    <div class="card-body">
+      <div class="d-flex align-items-center justify-content-between">
+        <h4 class="mx-1">${workout.name}</h4>
+        <div
+          class="fs-1 bg-secondary text-white text-center rounded-2 px-2 px-sm-5"
+        >
+          ${workout.calories}
+        </div>
+        <button class="delete btn btn-danger btn-sm mx-2">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+    `;
+    workoutsEl.appendChild(workoutEl)
   }
 
   // Update the UI after adding data
